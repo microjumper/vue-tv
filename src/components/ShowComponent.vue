@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .image-container {
   margin: 8px;
 
