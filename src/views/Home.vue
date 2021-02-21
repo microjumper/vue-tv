@@ -1,18 +1,60 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div v-if="movies" class="home">
+    <h2>Most Popular</h2>
+    <div class="shows-container">
+      <ShowComponent v-for="movie in movies" :key="movie.id" :movie="movie"></ShowComponent>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { ref, onMounted } from 'vue'
+import axios from "axios";
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+import {Show} from "@/models/show.model";
+import ShowComponent from "@/components/ShowComponent.vue";
+
+
+export default {
+  components: {ShowComponent},
+  setup() {
+    const movies = ref<Show[]>([]);
+
+    function getMostPopularMovies(page = 1): void {
+      axios
+          .get(`https://www.episodate.com/api/most-popular?page=${page}`)
+          .then(response => movies.value = response.data.tv_shows)
+          .catch(error => console.log(error));
+    }
+
+    onMounted(() => getMostPopularMovies(1));
+
+    return {
+      movies
+    }
+  }
+}
 </script>
+
+<style lang="scss">
+.home {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    margin: 1rem 1rem 0 1rem;
+
+    font-size: 1.5rem;
+    color: #fafafa;
+  }
+
+  .shows-container {
+    margin: 0.5rem;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+}
+</style>

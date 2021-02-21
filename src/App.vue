@@ -1,30 +1,21 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <nav class="navbar navbar-light bg-light">
+    <div class="nav-container">
+      <router-link class="navbar-brand" to="/">VueTV</router-link>
+    </div>
+  </nav>
+
   <router-view/>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+html, body {
+  background-color: #212121;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.nav-container {
+  margin: 0 1rem;
 }
 </style>
