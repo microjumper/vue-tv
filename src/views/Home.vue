@@ -1,8 +1,8 @@
 <template>
-  <div v-if="movies" class="home">
+  <div v-if="shows" class="home">
     <h2>Most Popular</h2>
     <div class="shows-container">
-      <ShowComponent v-for="movie in movies" :key="movie.id" :movie="movie"></ShowComponent>
+      <ShowComponent v-for="show in shows" :key="show.id" :show="show"></ShowComponent>
     </div>
   </div>
 </template>
@@ -18,19 +18,19 @@ import ShowComponent from "@/components/ShowComponent.vue";
 export default {
   components: {ShowComponent},
   setup() {
-    const movies = ref<Show[]>([]);
+    const shows = ref<Show[]>([]);
 
     function getMostPopularMovies(page = 1): void {
       axios
           .get(`https://www.episodate.com/api/most-popular?page=${page}`)
-          .then(response => movies.value = response.data.tv_shows)
+          .then(response => shows.value = response.data.tv_shows)
           .catch(error => console.log(error));
     }
 
     onMounted(() => getMostPopularMovies(1));
 
     return {
-      movies
+      shows
     }
   }
 }

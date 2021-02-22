@@ -1,16 +1,24 @@
 <template>
-  <div class="image-container">
-    <img :src="movie.image_thumbnail_path" alt="">
+  <div class="image-container" @click="onClick(show)">
+    <img :src="show.image_thumbnail_path" alt="">
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from 'vue';
+import { Show } from "@/models/show.model";
+
 export default {
   name: "ShowComponent",
   props: {
-    movie: {
-      type: Object,
+    show: {
+      type: Object as PropType<Show>,
       required: true
+    }
+  },
+  methods: {
+    onClick(show: Show): void {
+      console.log(show.id);
     }
   }
 }
