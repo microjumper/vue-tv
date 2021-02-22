@@ -7,6 +7,8 @@
 <script lang="ts">
 import { PropType } from 'vue';
 import { Show } from "@/models/show.model";
+import router from "@/router";
+
 
 export default {
   name: "ShowComponent",
@@ -18,7 +20,7 @@ export default {
   },
   methods: {
     onClick(show: Show): void {
-      console.log(show.id);
+      router.push({path: `/show/${show.id}`});
     }
   }
 }
