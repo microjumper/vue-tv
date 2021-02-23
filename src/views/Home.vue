@@ -1,4 +1,5 @@
 <template>
+  <searchbox></searchbox>
   <div v-if="shows" class="home">
     <h2>Most Popular</h2>
     <div class="shows-container">
@@ -13,21 +14,22 @@ import axios from "axios";
 
 import {Show} from "@/models/show.model";
 import ShowComponent from "@/components/ShowComponent.vue";
+import Searchbox from "@/components/Searchbox.vue";
 
 
 export default {
-  components: {ShowComponent},
+  components: {Searchbox, ShowComponent},
   setup() {
     const shows = ref<Show[]>([]);
 
-    function getMostPopularMovies(page = 1): void {
+    function getMostPopularShows(page = 1): void {
       axios
           .get(`https://www.episodate.com/api/most-popular?page=${page}`)
           .then(response => shows.value = response.data.tv_shows)
           .catch(error => console.log(error));
     }
 
-    onMounted(() => getMostPopularMovies(1));
+    onMounted(() => getMostPopularShows(1));
 
     return {
       shows
