@@ -2,10 +2,10 @@
   <div v-if="show" class="detail-container">
     <div class="card mb-3">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <img :src="show.image_thumbnail_path" alt="">
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ show.name }}</h5>
             <p class="card-text" v-html="show.description"></p>
@@ -64,7 +64,9 @@ export default {
       color: #212121;
 
       img {
-        height: 100%;
+        margin: 1rem;
+        padding-top: 1.5rem;
+        width: 100%;
         object-fit: cover;
       }
 
