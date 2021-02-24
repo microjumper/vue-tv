@@ -26,7 +26,7 @@
 <script lang="ts">
 import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
-import {ShowDetail} from "@/models/showdetail.model";
+import { ShowDetail } from "@/models/showdetail.model";
 import axios from "axios";
 
 export default {

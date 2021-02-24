@@ -4,7 +4,6 @@
       <router-link class="navbar-brand" to="/">VueTV</router-link>
     </div>
   </nav>
-
   <router-view/>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <searchbox></searchbox>
+  <searchbox-component></searchbox-component>
   <div v-if="shows" class="home">
     <h2>Most Popular</h2>
     <div class="shows-container">
@@ -9,16 +9,14 @@
 </template>
 
 <script lang="ts">
+import ShowComponent from "@/components/ShowComponent.vue";
+import SearchboxComponent from "@/components/SearchboxComponent.vue";
+import { Show } from "@/models/show.model";
 import { ref, onMounted } from 'vue'
 import axios from "axios";
 
-import {Show} from "@/models/show.model";
-import ShowComponent from "@/components/ShowComponent.vue";
-import Searchbox from "@/components/Searchbox.vue";
-
-
 export default {
-  components: {Searchbox, ShowComponent},
+  components: {SearchboxComponent, ShowComponent},
   setup() {
     const shows = ref<Show[]>([]);
 

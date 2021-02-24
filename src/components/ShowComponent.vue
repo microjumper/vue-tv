@@ -9,7 +9,6 @@ import { PropType } from 'vue';
 import { Show } from "@/models/show.model";
 import router from "@/router";
 
-
 export default {
   name: "ShowComponent",
   props: {
