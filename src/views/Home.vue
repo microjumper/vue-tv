@@ -5,32 +5,38 @@
     <div class="shows-container">
       <ShowComponent v-for="show in shows" :key="show.id" :show="show"></ShowComponent>
     </div>
+    <pagination-component :pageItems="10" :totalPages="totalPages" :getMostPopularShows="getMostPopularShows"></pagination-component>
   </div>
 </template>
 
 <script lang="ts">
 import ShowComponent from "@/components/ShowComponent.vue";
 import SearchboxComponent from "@/components/SearchboxComponent.vue";
+import PaginationComponent from "@/components/PaginationComponent.vue";
 import { Show } from "@/models/show.model";
 import { ref, onMounted } from 'vue'
 import axios from "axios";
 
 export default {
-  components: {SearchboxComponent, ShowComponent},
+  components: {PaginationComponent, SearchboxComponent, ShowComponent},
   setup() {
+    const totalPages = ref<number>(0);
     const shows = ref<Show[]>([]);
 
     function getMostPopularShows(page = 1): void {
       axios
           .get(`https://www.episodate.com/api/most-popular?page=${page}`)
-          .then(response => shows.value = response.data.tv_shows)
+          .then(response => {
+            totalPages.value = response.data.pages;
+            shows.value = response.data.tv_shows;
+          })
           .catch(error => console.log(error));
     }
 
-    onMounted(() => getMostPopularShows(1));
+    onMounted(() => getMostPopularShows());
 
     return {
-      shows
+      totalPages, shows, getMostPopularShows
     }
   }
 }
